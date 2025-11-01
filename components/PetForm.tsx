@@ -25,7 +25,7 @@ const PetForm: React.FC<PetFormProps> = ({ initialStatus, onSubmit }) => {
     contactEmail: '',
     photo: null, // This will hold the base64 string for preview
   });
-  const [status, setStatus] = useState<PetStatus>(initialStatus);
+  const status = initialStatus;
   const [isLoadingAI, setIsLoadingAI] = useState(false);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
 

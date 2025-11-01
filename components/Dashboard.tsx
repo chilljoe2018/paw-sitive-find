@@ -4,7 +4,6 @@ import Flyer from './Flyer';
 import MapView from './MapView';
 import { ClockIcon } from './icons/ClockIcon';
 import { DownloadIcon } from './icons/DownloadIcon';
-import { QrCodeIcon } from './icons/QrCodeIcon';
 import { ShareIcon } from './icons/ShareIcon';
 
 interface DashboardProps {

@@ -80,8 +80,8 @@ const MapView: React.FC<MapViewProps> = ({ pet }) => {
             key={index}
             className="absolute transform -translate-x-1/2 -translate-y-full focus:outline-none"
             style={{ 
-              left: `${p.coordinates.lng}%`, 
-              top: `${p.coordinates.lat}%`,
+              left: `${p.coordinates!.lng}%`, 
+              top: `${p.coordinates!.lat}%`,
               zIndex: selectedPet === p ? 30 : (isMainPet ? 20 : 10)
             }}
             onClick={(e) => { e.stopPropagation(); handleMarkerClick(p); }}
@@ -97,15 +97,15 @@ const MapView: React.FC<MapViewProps> = ({ pet }) => {
         <div
           className="absolute bg-white p-3 rounded-lg shadow-xl border w-60 transform -translate-x-1/2"
           style={{
-            left: `${selectedPet.coordinates.lng}%`,
-            top: `${selectedPet.coordinates.lat}%`,
+            left: `${selectedPet.coordinates!.lng}%`,
+            top: `${selectedPet.coordinates!.lat}%`,
             marginTop: '-5.5rem',
             zIndex: 40,
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <button onClick={handleClosePopup} className="absolute top-1 right-1 text-gray-500 hover:text-gray-800">&times;</button>
-          <img src={selectedPet.photo} alt={selectedPet.name} className="w-full h-24 object-cover rounded-md mb-2" />
+          <img src={selectedPet.photo ?? ''} alt={selectedPet.name} className="w-full h-24 object-cover rounded-md mb-2" />
           <h5 className="font-bold text-sm">{selectedPet.name}</h5>
           <p className="text-xs text-gray-600">{selectedPet.location}</p>
           <span className={`text-xs font-semibold ${selectedPet.status === PetStatus.Found ? 'text-green-600' : 'text-red-600'}`}>

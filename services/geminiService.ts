@@ -49,7 +49,7 @@ export const generateDescription = async (pet: Omit<Pet, 'id'>): Promise<string>
       model: model,
       contents: prompt,
     });
-    return response.text.trim();
+    return response.text?.trim() || '';
   } catch (error) {
     console.error("Error calling Gemini API:", error);
     throw new Error("Failed to generate description from AI.");
