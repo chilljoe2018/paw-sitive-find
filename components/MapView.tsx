@@ -80,8 +80,8 @@ const MapView: React.FC<MapViewProps> = ({ pet }) => {
             key={index}
             className="absolute transform -translate-x-1/2 -translate-y-full focus:outline-none"
             style={{ 
-              left: `${p.coordinates!.lng}%`, 
-              top: `${p.coordinates!.lat}%`,
+              left: `${p.coordinates?.lng ?? 50}%`, 
+              top: `${p.coordinates?.lat ?? 50}%`,
               zIndex: selectedPet === p ? 30 : (isMainPet ? 20 : 10)
             }}
             onClick={(e) => { e.stopPropagation(); handleMarkerClick(p); }}
@@ -97,8 +97,8 @@ const MapView: React.FC<MapViewProps> = ({ pet }) => {
         <div
           className="absolute bg-white p-3 rounded-lg shadow-xl border w-60 transform -translate-x-1/2"
           style={{
-            left: `${selectedPet.coordinates!.lng}%`,
-            top: `${selectedPet.coordinates!.lat}%`,
+            left: `${selectedPet.coordinates?.lng ?? 50}%`,
+            top: `${selectedPet.coordinates?.lat ?? 50}%`,
             marginTop: '-5.5rem',
             zIndex: 40,
           }}
