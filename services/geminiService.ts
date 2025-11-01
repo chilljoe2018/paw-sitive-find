@@ -1,17 +1,22 @@
 import { GoogleGenAI } from "@google/genai";
 import { Pet, PetStatus } from "../types";
 
-const GEMINI_API_KEY = process.env.API_KEY;
-
-let ai: GoogleGenAI | null = null;
-
-if (GEMINI_API_KEY) {
-  ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
-} else {
+/**
+ * Creates and returns a GoogleGenAI client instance if the API key is available.
+ * This function is called on-demand to ensure the client is initialized with the latest environment configuration.
+ * @returns {GoogleGenAI | null} A client instance or null if the API key is missing.
+ */
+const getAiClient = (): GoogleGenAI | null => {
+  const apiKey = process.env.API_KEY;
+  if (apiKey) {
+    return new GoogleGenAI({ apiKey });
+  }
   console.warn("Gemini API key not found. AI features will be disabled.");
-}
+  return null;
+};
 
 export const generateDescription = async (pet: Omit<Pet, 'id'>): Promise<string> => {
+  const ai = getAiClient();
   if (!ai) {
     return `This is a ${pet.gender} ${pet.color} ${pet.breed}. ${pet.status === PetStatus.Lost ? 'Last seen' : 'Found'} near ${pet.location}.`;
   }
